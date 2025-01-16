@@ -2,7 +2,10 @@ const { Builder, By, until } = require('selenium-webdriver');
 const chrome = require('selenium-webdriver/chrome');
 
 (async function testWebsite() {
-    let driver = await new Builder().forBrowser('chrome').build();
+    let options = new chrome.Options();
+    options.addArguments('--headless', '--disable-gpu', '--no-sandbox', '--disable-dev-shm-usage');
+
+    let driver = await new Builder().forBrowser('chrome').setChromeOptions(options).build();
 
     try {
         await driver.get('http://localhost'); 
